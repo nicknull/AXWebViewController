@@ -29,10 +29,11 @@
 #import <objc/runtime.h>
 #import <StoreKit/StoreKit.h>
 #import <AXPracticalHUD/AXPracticalHUD.h>
-
+#define AXRTL [[NSUserDefaults standardUserDefaults] boolForKey:@"RTL"]
 #ifndef AXWebViewControllerLocalizedString
 #define AXWebViewControllerLocalizedString(key, comment) \
-NSLocalizedStringFromTableInBundle(key, @"AXWebViewController", self.resourceBundle, comment)
+AXRTL?\
+NSLocalizedStringFromTableInBundle(key, @"ug-CN", self.resourceBundle, comment)
 #endif
 #if !AX_WEB_VIEW_CONTROLLER_USING_WEBKIT
 
