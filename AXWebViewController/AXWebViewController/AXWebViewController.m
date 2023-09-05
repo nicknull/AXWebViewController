@@ -30,10 +30,10 @@
 #import <StoreKit/StoreKit.h>
 #import <AXPracticalHUD/AXPracticalHUD.h>
 #import <AXRTLTool.h>
-//#ifndef AXWebViewControllerLocalizedString
-//#define AXWebViewControllerLocalizedString(key, comment) \
-//NSLocalizedStringFromTableInBundle(key, @"AXWebViewController", self.resourceBundle, comment)
-//#endif
+#ifndef AXWebViewControllerLocalizedString
+#define AXWebViewControllerLocalizedString(key, comment) \
+NSLocalizedStringFromTableInBundle(key, @"AXWebViewController", self.resourceBundle, comment)
+#endif
 #if !AX_WEB_VIEW_CONTROLLER_USING_WEBKIT
 #define AXRTL [[NSUserDefaults standardUserDefaults] boolForKey:@"RTL"]
 
