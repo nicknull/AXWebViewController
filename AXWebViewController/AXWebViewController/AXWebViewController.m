@@ -29,13 +29,13 @@
 #import <objc/runtime.h>
 #import <StoreKit/StoreKit.h>
 #import <AXPracticalHUD/AXPracticalHUD.h>
-#define AXRTL [[NSUserDefaults standardUserDefaults] boolForKey:@"RTL"]
-#ifndef AXWebViewControllerLocalizedString
-#define AXWebViewControllerLocalizedString(key, comment) \
-AXRTL?\
-NSLocalizedStringFromTableInBundle(key, @"ug-CN", self.resourceBundle, comment)
-#endif
+#import <AXRTLTool.h>
+//#ifndef AXWebViewControllerLocalizedString
+//#define AXWebViewControllerLocalizedString(key, comment) \
+//NSLocalizedStringFromTableInBundle(key, @"AXWebViewController", self.resourceBundle, comment)
+//#endif
 #if !AX_WEB_VIEW_CONTROLLER_USING_WEBKIT
+#define AXRTL [[NSUserDefaults standardUserDefaults] boolForKey:@"RTL"]
 
 typedef struct {
     char *identifier;
@@ -732,7 +732,7 @@ BOOL AX_WEB_VIEW_CONTROLLER_iOS10_0_AVAILABLE() { return AX_WEB_VIEW_CONTROLLER_
     UIImage* backItemHlImage = newImage?:[[UIImage imageNamed:@"backItemImage-hl" inBundle:self.resourceBundle compatibleWithTraitCollection:nil] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     UIButton* backButton = [UIButton buttonWithType:UIButtonTypeSystem];
     NSDictionary *attr = [[UIBarButtonItem appearance] titleTextAttributesForState:UIControlStateNormal];
-    NSString *backBarButtonItemTitleString = self.showsNavigationBackBarButtonItemTitle ? AXWebViewControllerLocalizedString(@"back", @"back") : @"    ";
+    NSString *backBarButtonItemTitleString = self.showsNavigationBackBarButtonItemTitle ? [AXRTLTool RTLLanguage:@"back"] : @"    ";
     if (attr) {
         [backButton setAttributedTitle:[[NSAttributedString alloc] initWithString:backBarButtonItemTitleString attributes:attr] forState:UIControlStateNormal];
         UIOffset offset = [[UIBarButtonItem appearance] backButtonTitlePositionAdjustmentForBarMetrics:UIBarMetricsDefault];
