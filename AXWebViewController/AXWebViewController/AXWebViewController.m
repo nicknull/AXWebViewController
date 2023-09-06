@@ -732,7 +732,8 @@ BOOL AX_WEB_VIEW_CONTROLLER_iOS10_0_AVAILABLE() { return AX_WEB_VIEW_CONTROLLER_
     UIImage* backItemHlImage = newImage?:[[UIImage imageNamed:@"backItemImage-hl" inBundle:self.resourceBundle compatibleWithTraitCollection:nil] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     UIButton* backButton = [UIButton buttonWithType:UIButtonTypeSystem];
     NSDictionary *attr = [[UIBarButtonItem appearance] titleTextAttributesForState:UIControlStateNormal];
-    NSString *backBarButtonItemTitleString = self.showsNavigationBackBarButtonItemTitle ? [AXRTLTool RTLLanguage:@"back"] : @"    ";
+    BOOL RTL = [[NSUserDefaults standardUserDefaults] boolForKey:@"RTL"];
+    NSString *backBarButtonItemTitleString = self.showsNavigationBackBarButtonItemTitle ?(RTL?@"قايتىش":@"返回") : @"    ";
     if (attr) {
         [backButton setAttributedTitle:[[NSAttributedString alloc] initWithString:backBarButtonItemTitleString attributes:attr] forState:UIControlStateNormal];
         UIOffset offset = [[UIBarButtonItem appearance] backButtonTitlePositionAdjustmentForBarMetrics:UIBarMetricsDefault];
@@ -747,7 +748,9 @@ BOOL AX_WEB_VIEW_CONTROLLER_iOS10_0_AVAILABLE() { return AX_WEB_VIEW_CONTROLLER_
     [backButton setImage:backItemImage forState:UIControlStateNormal];
     [backButton setImage:backItemHlImage forState:UIControlStateHighlighted];
     [backButton sizeToFit];
-    
+    backButton.semanticContentAttribute = UISemanticContentAttributeForceLeftToRight;
+
+
     [backButton addTarget:self action:@selector(navigationItemHandleBack:) forControlEvents:UIControlEventTouchUpInside];
     _navigationBackBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     return _navigationBackBarButtonItem;
