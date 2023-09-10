@@ -759,9 +759,9 @@ BOOL AX_WEB_VIEW_CONTROLLER_iOS10_0_AVAILABLE() { return AX_WEB_VIEW_CONTROLLER_
 - (UIBarButtonItem *)navigationCloseBarButtonItem {
     if (_navigationCloseBarButtonItem) return _navigationCloseBarButtonItem;
     if (self.navigationItem.rightBarButtonItem == _doneItem && self.navigationItem.rightBarButtonItem != nil) {
-        _navigationCloseBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:AXWebViewControllerLocalizedString(@"close", @"close") style:0 target:self action:@selector(doneButtonClicked:)];
+        _navigationCloseBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[AXRTLTool RTLLanguage:@"close"] style:0 target:self action:@selector(doneButtonClicked:)];
     } else {
-        _navigationCloseBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:AXWebViewControllerLocalizedString(@"close", @"close") style:0 target:self action:@selector(navigationIemHandleClose:)];
+        _navigationCloseBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[AXRTLTool RTLLanguage:@"close"] style:0 target:self action:@selector(navigationIemHandleClose:)];
     }
     return _navigationCloseBarButtonItem;
 }
@@ -967,8 +967,8 @@ BOOL AX_WEB_VIEW_CONTROLLER_iOS10_0_AVAILABLE() { return AX_WEB_VIEW_CONTROLLER_
     }
 }
 - (void)didStartLoad{
-    _backgroundLabel.text = AXWebViewControllerLocalizedString(@"loading", @"Loading");
-    self.navigationItem.title = AXWebViewControllerLocalizedString(@"loading", @"Loading");
+    _backgroundLabel.text = [AXRTLTool RTLLanguage:@"loading"];
+    self.navigationItem.title = [AXRTLTool RTLLanguage:@"loading"];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     if (_navigationType == AXWebViewControllerNavigationBarItem) {
         [self updateNavigationItems];
@@ -1039,7 +1039,7 @@ BOOL AX_WEB_VIEW_CONTROLLER_iOS10_0_AVAILABLE() { return AX_WEB_VIEW_CONTROLLER_
 #else
     host = _webView.request.URL.host;
 #endif
-    _backgroundLabel.text = [NSString stringWithFormat:@"%@\"%@\"%@.", AXWebViewControllerLocalizedString(@"web page",@""), host?:bundle, AXWebViewControllerLocalizedString(@"provided",@"")];
+    _backgroundLabel.text = [NSString stringWithFormat:@"%@\"%@\"%@.",[AXRTLTool RTLLanguage:@"web page"], host?:bundle, [AXRTLTool RTLLanguage:@"provided"]];
     if (_delegate && [_delegate respondsToSelector:@selector(webViewControllerDidFinishLoad:)]) {
         [_delegate webViewControllerDidFinishLoad:self];
     }
@@ -1062,8 +1062,8 @@ BOOL AX_WEB_VIEW_CONTROLLER_iOS10_0_AVAILABLE() { return AX_WEB_VIEW_CONTROLLER_
         [self loadURL:[NSURL fileURLWithPath:kAXNetworkErrorHTMLPath]];
     }
     // #endif
-    _backgroundLabel.text = [NSString stringWithFormat:@"%@%@",AXWebViewControllerLocalizedString(@"load failed:", nil) , error.localizedDescription];
-    self.navigationItem.title = AXWebViewControllerLocalizedString(@"load failed", nil);
+    _backgroundLabel.text = [NSString stringWithFormat:@"%@%@",[AXRTLTool RTLLanguage:@"load failed"], error.localizedDescription];
+    self.navigationItem.title = [AXRTLTool RTLLanguage:@"load failed"];
     if (_navigationType == AXWebViewControllerNavigationBarItem) {
         [self updateNavigationItems];
     }
@@ -1223,15 +1223,15 @@ BOOL AX_WEB_VIEW_CONTROLLER_iOS10_0_AVAILABLE() { return AX_WEB_VIEW_CONTROLLER_
     // Get host name of url.
     NSString *host = webView.URL.host;
     // Init the alert view controller.
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:host?:AXWebViewControllerLocalizedString(@"messages", nil) message:message preferredStyle: UIAlertControllerStyleAlert];
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:host?:[AXRTLTool RTLLanguage:@"messages"]  message:message preferredStyle: UIAlertControllerStyleAlert];
     // Init the cancel action.
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:AXWebViewControllerLocalizedString(@"cancel", @"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:[AXRTLTool RTLLanguage:@"cancel"]  style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         if (completionHandler != NULL) {
             completionHandler();
         }
     }];
     // Init the ok action.
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:AXWebViewControllerLocalizedString(@"confirm", @"confirm") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:[AXRTLTool RTLLanguage:@"confirm"] style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [alert dismissViewControllerAnimated:YES completion:NULL];
         if (completionHandler != NULL) {
             completionHandler();
@@ -1247,16 +1247,16 @@ BOOL AX_WEB_VIEW_CONTROLLER_iOS10_0_AVAILABLE() { return AX_WEB_VIEW_CONTROLLER_
     // Get the host name.
     NSString *host = webView.URL.host;
     // Initialize alert view controller.
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:host?:AXWebViewControllerLocalizedString(@"messages", nil) message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:host?:[AXRTLTool RTLLanguage:@"messages"] message:message preferredStyle:UIAlertControllerStyleAlert];
     // Initialize cancel action.
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:AXWebViewControllerLocalizedString(@"cancel", @"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:[AXRTLTool RTLLanguage:@"cancel"] style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
         [alert dismissViewControllerAnimated:YES completion:NULL];
         if (completionHandler != NULL) {
             completionHandler(NO);
         }
     }];
     // Initialize ok action.
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:AXWebViewControllerLocalizedString(@"confirm", @"confirm") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:[AXRTLTool RTLLanguage:@"confirm"] style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [alert dismissViewControllerAnimated:YES completion:NULL];
         if (completionHandler != NULL) {
             completionHandler(YES);
@@ -1271,14 +1271,14 @@ BOOL AX_WEB_VIEW_CONTROLLER_iOS10_0_AVAILABLE() { return AX_WEB_VIEW_CONTROLLER_
     // Get the host of url.
     NSString *host = webView.URL.host;
     // Initialize alert view controller.
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:prompt?:AXWebViewControllerLocalizedString(@"messages", nil) message:host preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:prompt?:[AXRTLTool RTLLanguage:@"messages"] message:host preferredStyle:UIAlertControllerStyleAlert];
     // Add text field.
     [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        textField.placeholder = defaultText?:AXWebViewControllerLocalizedString(@"input", nil);
+        textField.placeholder = defaultText?:[AXRTLTool RTLLanguage:@"input"];
         textField.font = [UIFont systemFontOfSize:12];
     }];
     // Initialize cancel action.
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:AXWebViewControllerLocalizedString(@"cancel", @"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:[AXRTLTool RTLLanguage:@"cancel"] style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
         [alert dismissViewControllerAnimated:YES completion:NULL];
         // Get inputed string.
         NSString *string = [alert.textFields firstObject].text;
@@ -1287,7 +1287,7 @@ BOOL AX_WEB_VIEW_CONTROLLER_iOS10_0_AVAILABLE() { return AX_WEB_VIEW_CONTROLLER_
         }
     }];
     // Initialize ok action.
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:AXWebViewControllerLocalizedString(@"confirm", @"confirm") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:[AXRTLTool RTLLanguage:@"confirm"] style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [alert dismissViewControllerAnimated:YES completion:NULL];
         // Get inputed string.
         NSString *string = [alert.textFields firstObject].text;
@@ -1452,11 +1452,11 @@ BOOL AX_WEB_VIEW_CONTROLLER_iOS10_0_AVAILABLE() { return AX_WEB_VIEW_CONTROLLER_
     // Get the host name.
     NSString *host = webView.URL.host;
     // Initialize alert view controller.
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:host?:AXWebViewControllerLocalizedString(@"messages", nil) message:AXWebViewControllerLocalizedString(@"terminate", nil) preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:host?:[AXRTLTool RTLLanguage:@"messages"] message:[AXRTLTool RTLLanguage:@"terminate"] preferredStyle:UIAlertControllerStyleAlert];
     // Initialize cancel action.
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:AXWebViewControllerLocalizedString(@"cancel", @"cancel") style:UIAlertActionStyleCancel handler:NULL];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:[AXRTLTool RTLLanguage:@"cancel"]  style:UIAlertActionStyleCancel handler:NULL];
     // Initialize ok action.
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:AXWebViewControllerLocalizedString(@"confirm", @"confirm") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:[AXRTLTool RTLLanguage:@"confirm"]  style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [alert dismissViewControllerAnimated:YES completion:NULL];
     }];
     // Add actions.
@@ -1611,7 +1611,7 @@ BOOL AX_WEB_VIEW_CONTROLLER_iOS10_0_AVAILABLE() { return AX_WEB_VIEW_CONTROLLER_
     if (title.length > _maxAllowedTitleLength) {
         title = [[title substringToIndex:_maxAllowedTitleLength-1] stringByAppendingString:@"…"];
     }
-    self.navigationItem.title = title.length>0 ? title : AXWebViewControllerLocalizedString(@"browsing the web", @"browsing the web");
+    self.navigationItem.title = title.length>0 ? title : [AXRTLTool RTLLanguage:@"browsing the web"];
 }
 
 - (void)updateFrameOfProgressView {

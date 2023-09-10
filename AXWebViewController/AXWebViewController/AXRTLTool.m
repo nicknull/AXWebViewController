@@ -12,16 +12,12 @@
 +(NSString *)RTLLanguage:(NSString *)key{
     
     
-    NSBundle *bundle = [NSBundle bundleForClass:AXWebViewController.class];
-    
-    NSString *resourcePath = [bundle pathForResource:@"AXWebViewController" ofType:@"bundle"] ;
-
     NSString *desiredLanguageCode = @"zh-Hans";
     BOOL RTL = [[NSUserDefaults standardUserDefaults] boolForKey:@"RTL"];
     if (RTL) {
         desiredLanguageCode = @"ug-CN";
     }
-    NSString *path = [[NSBundle bundleWithPath:resourcePath] pathForResource:desiredLanguageCode ofType:@"lproj"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:desiredLanguageCode ofType:@"lproj"];
     NSBundle *languageBundle = [NSBundle bundleWithPath:path];
     NSString *localizedString = [languageBundle localizedStringForKey:key value:@"" table:nil];
     return localizedString;

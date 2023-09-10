@@ -5,9 +5,7 @@
   Created by devedbox on 16/8/14.
   Copyright © 2016年 AiXing. All rights reserved.
 */
-//"back" = "返回";
-"back" = "";
-
+"back" = "返回";
 "close" = "关闭";
 "loading" = "加载中...";
 "load failed" = "加载失败";

@@ -24,7 +24,7 @@
 //  SOFTWARE.
 
 #import "AXWebViewControllerActivity.h"
-
+#import "AXRTLTool.h"
 @implementation AXWebViewControllerActivity
 - (NSString *)activityType {
     return NSStringFromClass([self class]);
@@ -74,8 +74,10 @@
             bundle = bundle2;
         }
     }
+    return [AXRTLTool RTLLanguage:@"OpenInChrome"];
+
     
-    return NSLocalizedStringFromTableInBundle(@"OpenInChrome", @"AXWebViewController", bundle, @"Open in Chrome");
+//    return NSLocalizedStringFromTableInBundle(@"OpenInChrome", @"AXWebViewController", bundle, @"Open in Chrome");
     
 }
 
@@ -124,8 +126,9 @@
             bundle = bundle2;
         }
     }
+    return [AXRTLTool RTLLanguage:@"OpenInSafari"];
     
-    return NSLocalizedStringFromTableInBundle(@"OpenInSafari", @"AXWebViewController", bundle, @"Open in Safari");
+//    return NSLocalizedStringFromTableInBundle(@"OpenInSafari", @"AXWebViewController", bundle, @"Open in Safari");
 }
 
 - (BOOL)canPerformWithActivityItems:(NSArray *)activityItems {
