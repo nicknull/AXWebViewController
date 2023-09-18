@@ -273,6 +273,7 @@ BOOL AX_WEB_VIEW_CONTROLLER_iOS10_0_AVAILABLE() { return AX_WEB_VIEW_CONTROLLER_
         _timeoutInternal = 30.0;
         _cachePolicy = NSURLRequestReloadRevalidatingCacheData;
     }
+
 }
 
 - (instancetype)initWithAddress:(NSString *)urlString {
@@ -360,7 +361,6 @@ BOOL AX_WEB_VIEW_CONTROLLER_iOS10_0_AVAILABLE() { return AX_WEB_VIEW_CONTROLLER_
 #else
     self.view.backgroundColor = [UIColor whiteColor];
     self.progressView.progressTintColor = self.navigationController.navigationBar.tintColor;
-    [_webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
     
     // [_webView.scrollView addObserver:self forKeyPath:@"backgroundColor" options:NSKeyValueObservingOptionNew context:NULL];
 #endif
@@ -622,6 +622,8 @@ BOOL AX_WEB_VIEW_CONTROLLER_iOS10_0_AVAILABLE() { return AX_WEB_VIEW_CONTROLLER_
     [_webView addObserver:self forKeyPath:@"scrollView.contentOffset" options:NSKeyValueObservingOptionNew context:NULL];
     // Obverse title. Fix issue: https://github.com/devedbox/AXWebViewController/issues/35
     [_webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:NULL];
+    [_webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
+
     return _webView;
 }
 
